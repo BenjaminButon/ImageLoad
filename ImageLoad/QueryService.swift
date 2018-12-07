@@ -54,28 +54,6 @@ class QueryService{
         }
         dataTask.resume()
     }
-    func getImageWithId(_ id: Int) -> Data {
-        var resultData = Data()
-        let url = URL(string: "https://picsum.photos/200/300/?random")!
-        let dataTask = URLSession.shared.dataTask(with: url){data, response, error in
-            
-            if let error = error{
-                print(error.localizedDescription)
-            }
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                print("bad response")
-                return
-            }
-            if let data = data{
-                DispatchQueue.main.async {
-                    resultData = data
-                }
-            }
-        }
-        dataTask.resume()
-        
-        return resultData
-    }
     
     private init(){}
 }

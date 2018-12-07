@@ -73,6 +73,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource{
         guard let currentWidth = currentImage["width"] as? CGFloat else { return self.defaultHeight}
         guard let currentHeight = currentImage["height"] as? CGFloat else { return self.defaultHeight}
         let size = self.calculateImageSize(currentWidth: currentWidth, currentHeight: currentHeight)
-        return CGFloat(size.height)
+        return size.height
     }
 }
