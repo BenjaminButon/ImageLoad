@@ -12,9 +12,8 @@ class QueryService{
     
     static let shared = QueryService()
     
-    func loadImageWithId(_ id: Int, into imageView: UIImageView){
-        print("loading image")
-        let urlString = "https://picsum.photos/200/300/?image=" + String(id)
+    func loadImageWithId(_ id: Int, into imageView: UIImageView, width: Int, height: Int){
+        let urlString = "https://picsum.photos/" + String(width) + "/" + String(height) + "/?image=" + String(id)
         let url = URL(string: urlString)!
         let dataTask = URLSession.shared.dataTask(with: url){data, response, error in
             
