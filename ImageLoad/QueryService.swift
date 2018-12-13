@@ -12,28 +12,26 @@ class QueryService{
     
     static let shared = QueryService()
     private let queue = DispatchQueue.global(qos: .utility)
+    
     func loadImageWithId(_ id: Int, into imageView: UIImageView, width: Int, height: Int){
         let urlString = "https://picsum.photos/" + String(width) + "/" + String(height) + "/?image=" + String(id)
         let url = URL(string: urlString)!
-        self.queue.async {
-            let dataTask = URLSession.shared.dataTask(with: url){data, response, error in
-                if let error = error{
-                    print(error.localizedDescription)
-                }
-                guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                    print("bad response")
-                    return
-                }
-                if let data = data{
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: data)
-                        imageView.image = image
-                    }
+        let dataTask = URLSession.shared.dataTask(with: url){data, response, error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("bad response")
+                return
+            }
+            if let data = data{
+                DispatchQueue.main.async {
+                    let image = UIImage(data: data)
+                    imageView.image = image
                 }
             }
-            
-            dataTask.resume()
         }
+        dataTask.resume()
     }
 
     func loadArrayFromUrl(_ url: URL, into controller: MainViewController){
@@ -56,6 +54,8 @@ class QueryService{
         }
         dataTask.resume()
     }
+    
+
     
     private init(){}
 }

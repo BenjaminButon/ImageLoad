@@ -52,7 +52,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource{
                 return UITableViewCell()
             }
             cell.cellImageView?.contentMode = .scaleAspectFit
-            cell.cellImageView.image =
+            cell.cellImageView.image = UIImage()
             let currentImage = imagesArray[indexPath.section]
             guard let currentId = currentImage["id"] as? Int else { return cell}
             guard let currentWidth = currentImage["width"] as? CGFloat else { return cell}
